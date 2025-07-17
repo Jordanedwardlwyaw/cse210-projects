@@ -1,15 +1,11 @@
 using System;
 
-// EXCEEDS REQUIREMENTS:
-// - Added difficulty levels (easy/medium/hard) for number of words hidden per round.
-// - Tracks how many rounds it took to complete.
-// - Uses console colors for better readability.
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Choose difficulty
+        
         Console.WriteLine("Welcome to the Scripture Memorizer!");
         Console.WriteLine("Choose a difficulty level:");
         Console.WriteLine("1. Easy (1 word hidden per round)");
