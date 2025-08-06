@@ -11,7 +11,7 @@ namespace EternalQuest
 
         public bool IsCompleted => _completed;
 
-        protected Goal() { } // For deserialization
+        protected Goal() { } 
 
         public Goal(string name, string description, int points)
         {

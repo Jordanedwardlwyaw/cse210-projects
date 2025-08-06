@@ -9,12 +9,12 @@ namespace EternalQuest
 
         public override int RecordEvent()
         {
-            return Points; // Eternal goals never complete but always award points
+            return Points; 
         }
 
         public override string GetStatus()
         {
-            return "[∞]"; // Infinity symbol for eternal goals
+            return "[∞]"; 
         }
     }
 }

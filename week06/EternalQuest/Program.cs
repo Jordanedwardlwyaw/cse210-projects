@@ -148,13 +148,3 @@ namespace EternalQuest
     }
 }
 
-/*
-Creative additions beyond core requirements:
-
-- Polymorphic JSON serialization to save/load all goal types including progress.
-- Notification with bonus points when checklist goals complete.
-- Eternal goals show an infinity symbol in the status.
-- Input validation for user input.
-- Console menu with clear feedback and user-friendly interface.
-- Well-structured code organized by class, supporting easy extension.
-*/
