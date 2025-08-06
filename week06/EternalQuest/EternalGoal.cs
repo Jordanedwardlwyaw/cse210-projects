@@ -1,21 +1,20 @@
-public class EternalGoal : Goal
+namespace EternalQuest
 {
-    public EternalGoal(string name, string description, int points)
+    public class EternalGoal : Goal
     {
-        Name = name;
-        Description = description;
-        Points = points;
+        public EternalGoal() : base() { }
+
+        public EternalGoal(string name, string description, int points)
+            : base(name, description, points) { }
+
+        public override int RecordEvent()
+        {
+            return Points; // Eternal goals never complete but always award points
+        }
+
+        public override string GetStatus()
+        {
+            return "[∞]"; // Infinity symbol for eternal goals
+        }
     }
-
-    public override void RecordEvent()
-    {
-        Console.WriteLine($"You earned {Points} points!");
-        GoalManager.AddPoints(Points);
-    }
-
-    public override bool IsComplete() => false;
-
-    public override string GetDetails() => $"[ ] {Name} ({Description})";
-
-    public override string GetStringRepresentation() => $"EternalGoal|{Name}|{Description}|{Points}";
 }

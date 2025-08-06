@@ -1,41 +1,50 @@
-public class ChecklistGoal : Goal
+namespace EternalQuest
 {
-    private int _amountCompleted = 0;
-    private int _target;
-    private int _bonus;
-
-    public ChecklistGoal(string name, string description, int points, int target, int bonus)
+    public class ChecklistGoal : Goal
     {
-        Name = name;
-        Description = description;
-        Points = points;
-        _target = target;
-        _bonus = bonus;
-    }
+        public int TargetCount { get; private set; }
+        public int CurrentCount { get; set; }
+        public int BonusPoints { get; private set; }
 
-    public override void RecordEvent()
-    {
-        _amountCompleted++;
-        GoalManager.AddPoints(Points);
-        Console.WriteLine($"You earned {Points} points!");
+        public ChecklistGoal() : base() { }
 
-        if (_amountCompleted == _target)
+        public ChecklistGoal(string name, string description, int points, int targetCount, int bonusPoints)
+            : base(name, description, points)
         {
-            Console.WriteLine($"Bonus! You earned {_bonus} points!");
-            GoalManager.AddPoints(_bonus);
+            TargetCount = targetCount;
+            BonusPoints = bonusPoints;
+            CurrentCount = 0;
         }
-    }
 
-    public override bool IsComplete() => _amountCompleted >= _target;
+        public override int RecordEvent()
+        {
+            if (_completed)
+                return 0;
 
-    public override string GetDetails()
-    {
-        string mark = IsComplete() ? "X" : " ";
-        return $"[{mark}] {Name} ({Description}) -- Completed: {_amountCompleted}/{_target}";
-    }
+            CurrentCount++;
+            int totalPoints = Points;
 
-    public override string GetStringRepresentation()
-    {
-        return $"ChecklistGoal|{Name}|{Description}|{Points}|{_bonus}|{_target}|{_amountCompleted}";
+            if (CurrentCount >= TargetCount)
+            {
+                _completed = true;
+                totalPoints += BonusPoints;
+                System.Console.WriteLine($"Congrats! You earned a bonus of {BonusPoints} points!");
+            }
+
+            return totalPoints;
+        }
+
+        public override string GetStatus()
+        {
+            if (_completed)
+                return "[X]";
+            else
+                return $"[ ] Completed {CurrentCount}/{TargetCount}";
+        }
+
+        public override string ToString()
+        {
+            return $"{GetStatus()} {Name} ({Description})";
+        }
     }
 }
